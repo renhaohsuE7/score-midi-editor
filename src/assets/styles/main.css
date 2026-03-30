@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary */
+  --color-primary: #6366F1;
+  --color-primary-light: #818CF8;
+  --color-primary-dark: #4F46E5;
+
+  /* Functional */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Surface */
+  --color-surface: #FFFFFF;
+  --color-surface-dim: #F9FAFB;
+  --color-surface-dark: #0F172A;
+  --color-surface-dark-dim: #1E293B;
+  --color-on-surface: #111827;
+  --color-on-surface-dark: #F1F5F9;
+
+  /* Fonts */
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* iOS safe area insets (requires viewport-fit=cover) */
+#app {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+}

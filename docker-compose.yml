@@ -1,0 +1,21 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "${VITE_PORT:-12358}:${VITE_PORT:-12358}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env.dev
+
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "${PROD_PORT:-1235}:80"
+    env_file:
+      - .env.prod
