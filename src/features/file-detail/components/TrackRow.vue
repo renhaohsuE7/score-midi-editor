@@ -6,11 +6,13 @@ import VolumeSlider from './VolumeSlider.vue'
 defineProps<{
   track: TrackSnapshot
   compact?: boolean
+  visible?: boolean
 }>()
 
 const emit = defineEmits<{
   toggleMute: [index: number]
   toggleSolo: [index: number]
+  toggleVisibility: [index: number]
   volumeChange: [index: number, volumeDb: number]
 }>()
 </script>
@@ -21,8 +23,11 @@ const emit = defineEmits<{
     v-if="compact"
     class="flex flex-col items-center gap-1 border-b border-gray-200 py-2 dark:border-gray-700"
   >
-    <div
-      :class="['h-1 w-6 rounded-full', TRACK_BG_COLORS[track.index % TRACK_BG_COLORS.length]]"
+    <button
+      :class="['h-1 w-6 rounded-full transition-opacity', TRACK_BG_COLORS[track.index % TRACK_BG_COLORS.length]]"
+      :style="{ opacity: visible === false ? 0.3 : 1 }"
+      :title="visible === false ? 'Show in Piano Roll' : 'Hide in Piano Roll'"
+      @click="emit('toggleVisibility', track.index)"
     />
     <button
       :class="[
@@ -57,8 +62,11 @@ const emit = defineEmits<{
   >
     <!-- Row 1: color + name -->
     <div class="flex items-center gap-2">
-      <div
-        :class="['h-3 w-3 shrink-0 rounded-full', TRACK_BG_COLORS[track.index % TRACK_BG_COLORS.length]]"
+      <button
+        :class="['h-3 w-3 shrink-0 rounded-full cursor-pointer transition-opacity', TRACK_BG_COLORS[track.index % TRACK_BG_COLORS.length]]"
+        :style="{ opacity: visible === false ? 0.3 : 1 }"
+        :title="visible === false ? 'Show in Piano Roll' : 'Hide in Piano Roll'"
+        @click="emit('toggleVisibility', track.index)"
       />
       <span
         class="min-w-0 flex-1 truncate text-sm font-medium text-on-surface dark:text-on-surface-dark"

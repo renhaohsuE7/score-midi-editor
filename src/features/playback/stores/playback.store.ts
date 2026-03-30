@@ -24,6 +24,19 @@ export const usePlaybackStore = defineStore('playback', () => {
   const tracks = ref<readonly TrackSnapshot[]>([])
   const playbackTracks = ref<PlaybackTrack[]>([])
 
+  // --- Track visibility (UI-only, does not affect audio) ---
+  const trackVisibility = ref<Map<number, boolean>>(new Map())
+
+  function isTrackVisible(index: number): boolean {
+    return trackVisibility.value.get(index) ?? true
+  }
+
+  function toggleTrackVisibility(index: number): void {
+    const current = trackVisibility.value.get(index) ?? true
+    trackVisibility.value.set(index, !current)
+    trackVisibility.value = new Map(trackVisibility.value) // trigger reactivity
+  }
+
   // --- Derived getters ---
   const isPlaying = computed(() => state.value === 'playing')
   const isPaused = computed(() => state.value === 'paused')
@@ -62,6 +75,9 @@ export const usePlaybackStore = defineStore('playback', () => {
     progress,
     formattedCurrentTime,
     formattedDuration,
+    trackVisibility,
+    isTrackVisible,
+    toggleTrackVisibility,
     applySnapshot,
     setPlaybackTracks,
   }

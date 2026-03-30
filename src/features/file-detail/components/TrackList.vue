@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TrackSnapshot } from '@/features/playback/types/playback.types'
+import { usePlaybackStore } from '@/features/playback/stores/playback.store'
 import TrackRow from './TrackRow.vue'
 
 defineProps<{
@@ -12,6 +13,8 @@ const emit = defineEmits<{
   toggleSolo: [index: number]
   volumeChange: [index: number, volumeDb: number]
 }>()
+
+const playbackStore = usePlaybackStore()
 </script>
 
 <template>
@@ -24,8 +27,10 @@ const emit = defineEmits<{
       :key="track.index"
       :track="track"
       :compact="compact"
+      :visible="playbackStore.isTrackVisible(track.index)"
       @toggle-mute="emit('toggleMute', $event)"
       @toggle-solo="emit('toggleSolo', $event)"
+      @toggle-visibility="playbackStore.toggleTrackVisibility($event)"
       @volume-change="(idx, vol) => emit('volumeChange', idx, vol)"
     />
   </div>

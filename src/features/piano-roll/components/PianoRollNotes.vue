@@ -46,6 +46,8 @@ function notesFromPlayback(): NoteRect[] {
   const trackSnapshots = playbackStore.tracks
 
   for (let ti = 0; ti < tracks.length; ti++) {
+    if (!playbackStore.isTrackVisible(ti)) continue
+
     const track = tracks[ti]!
     const color = TRACK_HEX_COLORS[ti % TRACK_HEX_COLORS.length]!
     const snapshot = trackSnapshots[ti]
@@ -77,6 +79,8 @@ function notesFromEditor(): NoteRect[] {
   const drag = editorStore.dragState
 
   for (const note of editorStore.editableNotes.values()) {
+    if (!playbackStore.isTrackVisible(note.trackIndex)) continue
+
     const color = TRACK_HEX_COLORS[note.trackIndex % TRACK_HEX_COLORS.length]!
     const isSelected = selectedIds.has(note.id)
     const isDragTarget = drag && drag.originNotes.some((n) => n.id === note.id)
