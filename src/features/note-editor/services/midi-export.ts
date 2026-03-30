@@ -153,7 +153,7 @@ export function exportToMidi(
 
 /** Trigger browser download of a MIDI file */
 export function downloadMidi(data: Uint8Array, filename: string): void {
-  const blob = new Blob([data], { type: 'audio/midi' })
+  const blob = new Blob([data as BlobPart], { type: 'audio/midi' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url

@@ -48,8 +48,8 @@ describe('TrackController', () => {
   it('scheduleEvents creates synth and schedules on transport', () => {
     const tc = new TrackController(0, 'Piano', MockTone)
     const events = [
-      { note: 'C4', time: 0, duration: 0.5, velocity: 0.8 },
-      { note: 'D4', time: 0.5, duration: 0.5, velocity: 0.7 },
+      { midi: 60, note: 'C4', time: 0, duration: 0.5, velocity: 0.8 },
+      { midi: 62, note: 'D4', time: 0.5, duration: 0.5, velocity: 0.7 },
     ]
 
     tc.scheduleEvents(events, mockTransport as unknown as ReturnType<typeof import('tone').getTransport>)
@@ -126,7 +126,7 @@ describe('TrackController', () => {
   it('dispose clears scheduled IDs and disposes audio nodes', () => {
     const tc = new TrackController(0, 'Piano', MockTone)
     tc.scheduleEvents(
-      [{ note: 'C4', time: 0, duration: 0.5, velocity: 0.8 }],
+      [{ midi: 60, note: 'C4', time: 0, duration: 0.5, velocity: 0.8 }],
       mockTransport as unknown as ReturnType<typeof import('tone').getTransport>,
     )
 

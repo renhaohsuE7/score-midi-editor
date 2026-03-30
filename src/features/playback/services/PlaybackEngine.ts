@@ -2,7 +2,6 @@ import type {
   PlaybackData,
   PlaybackState,
   PlaybackAction,
-  EngineSnapshot,
   PlaybackEngineConfig,
 } from '../types/playback.types'
 import { TrackController } from './TrackController'

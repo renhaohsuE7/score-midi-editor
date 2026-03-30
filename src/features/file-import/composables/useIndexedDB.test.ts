@@ -55,7 +55,7 @@ describe('useIndexedDB', () => {
 
     const listFile = files.find((f) => f.id === 'list-1')
     expect(listFile).toBeDefined()
-    expect((listFile as Record<string, unknown>)['blob']).toBeUndefined()
+    expect((listFile as unknown as Record<string, unknown>)['blob']).toBeUndefined()
   })
 
   it('saves and retrieves parsed data', async () => {
@@ -64,7 +64,7 @@ describe('useIndexedDB', () => {
 
     expect(result).toBeDefined()
     expect(result!.type).toBe('midi')
-    expect(result!.data.name).toBe('Test')
+    expect((result!.data as { name: string }).name).toBe('Test')
   })
 
   it('returns undefined for non-existent parsed data', async () => {

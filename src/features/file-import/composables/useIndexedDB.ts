@@ -1,5 +1,5 @@
 import { openDB, type IDBPDatabase } from 'idb'
-import type { FileRecord, ImportedFile, ParsedData } from '../types/file.types'
+import type { FileRecord, ParsedData } from '../types/file.types'
 
 interface ScoreMidiDB {
   files: {

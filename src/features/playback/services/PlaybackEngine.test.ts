@@ -75,7 +75,7 @@ const testData: PlaybackData = {
   tracks: [
     {
       name: 'Piano',
-      events: [{ note: 'C4', time: 0, duration: 0.5, velocity: 0.8 }],
+      events: [{ midi: 60, note: 'C4', time: 0, duration: 0.5, velocity: 0.8 }],
     },
   ],
   duration: 4,
@@ -211,8 +211,8 @@ describe('PlaybackEngine', () => {
     await engine.ensureAudioContext()
     const multiTrackData: PlaybackData = {
       tracks: [
-        { name: 'Piano', events: [{ note: 'C4', time: 0, duration: 0.5, velocity: 0.8 }] },
-        { name: 'Bass', events: [{ note: 'C2', time: 0, duration: 0.5, velocity: 0.8 }] },
+        { name: 'Piano', events: [{ midi: 60, note: 'C4', time: 0, duration: 0.5, velocity: 0.8 }] },
+        { name: 'Bass', events: [{ midi: 36, note: 'C2', time: 0, duration: 0.5, velocity: 0.8 }] },
       ],
       duration: 4,
       bpm: 120,
